@@ -54,7 +54,7 @@ build_script:
   - qmake qbittorrent.pro && cd src && qmake src.pro
   - jom -j2 -f Makefile.Release
   
-after_build:
-  - ps: Get-ChildItem .\*.exe | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+artifacts:
+  - path: release\*.exe
 
 test: off
