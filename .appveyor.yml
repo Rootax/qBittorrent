@@ -53,5 +53,8 @@ build_script:
   - cd "%REPO_DIR%"
   - qmake qbittorrent.pro && cd src && qmake src.pro
   - jom -j2 -f Makefile.Release
+  
+  after_build:
+  - ps: Get-ChildItem .\*.exe | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
 test: off
