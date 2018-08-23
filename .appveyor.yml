@@ -55,6 +55,6 @@ build_script:
   - jom -j2 -f Makefile.Release
   
 artifacts:
-  - path: release\*.exe
+  - path: c:\qbittorrent\release\*.exe
 
 test: off
