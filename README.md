@@ -1,4 +1,4 @@
-qBittorrent - A BitTorrent client in Qt
+Original : qBittorrent - A BitTorrent client in Qt
 ------------------------------------------
 
 [![TravisCI Status](https://travis-ci.org/qbittorrent/qBittorrent.svg?branch=master)](https://travis-ci.org/qbittorrent/qBittorrent)
