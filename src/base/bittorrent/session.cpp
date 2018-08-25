@@ -420,7 +420,7 @@ Session::Session(QObject *parent)
     // Disk cache pool is rarely tested in libtorrent and doesn't free buffers
     // Soon to be deprecated there
     // More info: https://github.com/arvidn/libtorrent/issues/2251
-    sessionSettings.use_disk_cache_pool = false;
+    sessionSettings.use_disk_cache_pool = true;
     configure(sessionSettings);
     m_nativeSession->set_settings(sessionSettings);
     configureListeningInterface();
@@ -449,7 +449,7 @@ Session::Session(QObject *parent)
     // Disk cache pool is rarely tested in libtorrent and doesn't free buffers
     // Soon to be deprecated there
     // More info: https://github.com/arvidn/libtorrent/issues/2251
-    pack.set_bool(libt::settings_pack::use_disk_cache_pool, false);
+    pack.set_bool(libt::settings_pack::use_disk_cache_pool, true);
     // libtorrent 1.1 enables UPnP & NAT-PMP by default
     // turn them off before `libt::session` ctor to avoid split second effects
     pack.set_bool(libt::settings_pack::enable_upnp, false);
@@ -3048,7 +3048,7 @@ int Session::diskCacheSize() const
     int size = m_diskCacheSize;
     // These macros may not be available on compilers other than MSVC and GCC
 #if defined(__x86_64__) || defined(_M_X64)
-    size = qMin(size, 4096);  // 4GiB
+    size = qMin(size, 12288);  // 12GiB
 #else
     // When build as 32bit binary, set the maximum at less than 2GB to prevent crashes
     // allocate 1536MiB and leave 512MiB to the rest of program data in RAM
@@ -3060,7 +3060,7 @@ int Session::diskCacheSize() const
 void Session::setDiskCacheSize(int size)
 {
 #if defined(__x86_64__) || defined(_M_X64)
-    size = qMin(size, 4096);  // 4GiB
+    size = qMin(size, 12288);  // 12GiB
 #else
     // allocate 1536MiB and leave 512MiB to the rest of program data in RAM
     size = qMin(size, 1536);
